@@ -1,0 +1,10 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "myuser",
+    "password": "sercet",
+    "database": "mydb",
+    "entities": ["src/server.ts"],
+    "synchronize": true
+  }

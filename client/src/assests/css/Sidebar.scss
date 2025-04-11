@@ -1,0 +1,13 @@
+.sidebar {
+    height: 100%;
+    
+}
+
+.sidebar-item {
+    background-color: white;
+    cursor: pointer;
+}
+
+.sidebar-item.active {
+    background-color: #eeeeee;
+}
