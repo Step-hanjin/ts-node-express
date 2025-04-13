@@ -19,9 +19,9 @@ export const AppDataSource = new DataSource({
   password: DB_PASSWORD,
   database: DB_DATABASE,
 
-  synchronize: false,
+  synchronize: true,
   //logging logs sql command on the treminal
-  logging: false,
+  logging: true,
   entities: [
     Country, 
     Paymonth,

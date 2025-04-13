@@ -4,7 +4,7 @@ import { Country } from "./country";
 @Entity({ name: 'contacts' })
 export class Contact {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column({ nullable: false })
     name: string;
@@ -18,7 +18,7 @@ export class Contact {
     @Column({ nullable: false })
     note: string;
 
-    @ManyToOne(() => Country, (country) => country)
+    @ManyToOne(() => Country, (country) => country.contacts)
     country: Country;
 }
 

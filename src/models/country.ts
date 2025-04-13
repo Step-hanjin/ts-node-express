@@ -9,11 +9,11 @@ import { Contact } from "./contact";
 @Entity("countries")
 export class Country {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column()
   name: string;
 
   @OneToMany(() => Contact, (contact) => contact.country)
-  contact: Contact[]
+  contacts: Contact[]
 }

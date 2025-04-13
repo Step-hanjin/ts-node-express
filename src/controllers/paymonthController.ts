@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { Paymonth } from "../models/paymonth";
 import { AppDataSource } from '../data-source';
+import { Paymonth } from '../models/paymonth';
+import { PaymonthService } from "../services/paymonth.service";
 
 // Create an paymonth
 export const createPaymonth = async (req: Request, res: Response, next: NextFunction) => {
@@ -10,12 +11,14 @@ export const createPaymonth = async (req: Request, res: Response, next: NextFunc
             start_time,
             end_time
          } = req.body;
+
         const paymonth = new Paymonth();
         paymonth.month = month;
         paymonth.start_time = start_time;
         paymonth.end_time = end_time;
-        const paymonthRepository = AppDataSource.getRepository(Paymonth);
-        const result = await paymonthRepository.save(paymonth);
+        
+        const paymonthService = new PaymonthService();
+        const result = await paymonthService.createPaymonth(paymonth);
 
         res.status(201).json(result);
     } catch (error) {
@@ -26,8 +29,8 @@ export const createPaymonth = async (req: Request, res: Response, next: NextFunc
 // Read all paymonths
 export const getPaymonths = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const paymonthRepository = AppDataSource.getRepository(Paymonth);
-        const paymonths = await paymonthRepository.find();
+        const paymonthService = new PaymonthService();
+        const paymonths = await paymonthService.getPaymonths();
 
         res.status(200).json(paymonths);
     } catch (error) {
@@ -39,10 +42,9 @@ export const getPaymonths = async (req: Request, res: Response, next: NextFuncti
 export const getPaymonthById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const paymonthRepository = AppDataSource.getRepository(Paymonth);
-        const paymonth = await paymonthRepository.findOne({
-            where: { id },
-        });
+        const paymonthService = new PaymonthService();
+        const paymonth = await paymonthService.getPaymonthById(Number(id));
+
         if (!paymonth) {
             res.status(404).json({ message: 'Paymonth not fount '});
             return;
@@ -63,18 +65,18 @@ export const updatePaymonth = async (req: Request, res: Response, next: NextFunc
             end_time
          } = req.body;
 
-        const paymonthRepository = AppDataSource.getRepository(Paymonth);
-        const paymonth = await paymonthRepository.findOne({
-            where: { id }
-        });
-        if (!paymonth) {
+         const paymonth = new Paymonth();
+         paymonth.month = month;
+         paymonth.start_time = start_time;
+         paymonth.end_time = end_time;
+         const paymonthService = new PaymonthService();
+        
+         const result = await paymonthService.updatePaymonth(Number(id), paymonth);
+
+        if (!result) {
             res.status(404).json({ message: 'Paymonth not found' });
             return;
         }
-        paymonth.month = month;
-        paymonth.start_time = start_time;
-        paymonth.end_time = end_time;
-        const result = await paymonthRepository.save(paymonth);
         res.status(200).json(result);
     } catch(error) {
         next(error);
@@ -85,15 +87,14 @@ export const updatePaymonth = async (req: Request, res: Response, next: NextFunc
 export const deletePaymonth = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const paymonthRepository = AppDataSource.getRepository(Paymonth);
-        const paymonth = await paymonthRepository.findOne({
-            where: { id }
-        });
+        const paymonthService = new PaymonthService();
+        const paymonth = await paymonthService.deletePaymonth(Number(id));
+
         if (!paymonth)  {
             res.status(404).json({ message: 'Paymonth not found' });
             return;
         }
-        await paymonthRepository.remove(paymonth);
+
         res.status(200).json({
             message: 'ok'
         });

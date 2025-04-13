@@ -1,5 +1,6 @@
 # Top-level node_modules directory
 node_modules/
+dist/
 
 # React client node_modules directory
 client/node_modules/

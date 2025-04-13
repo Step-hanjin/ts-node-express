@@ -1,12 +1,12 @@
 {
   "name": "ts-node-express",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "src/server.ts",
   "scripts": {
     "watch": "tsc -w",
     "build": "tsc",
     "start": "ts-node src/server.ts",
-    "start:dev": "concurrently \"tsc -w\" \"nodemon build/index.js\"",
+    "start:dev": "concurrently \"tsc -w\" \"nodemon build/src/server.js\"",
     "dev": "nodemon build/server.js",
     "lint": "eslint 'src/**/*.ts'",
     "dev1": "nodemon --exec ts-node ./src/server.ts",

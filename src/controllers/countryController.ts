@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { Country } from "../models/country";
-import { AppDataSource } from '../data-source';
+import { CountryService } from '../services/country.service';
+
 
 // Create an country
 export const createCountry = async (req: Request, res: Response, next: NextFunction) => {
@@ -8,8 +9,9 @@ export const createCountry = async (req: Request, res: Response, next: NextFunct
         const { name } = req.body;
         const country = new Country();
         country.name = name;
-        const countryRepository = AppDataSource.getRepository(Country);
-        const result = await countryRepository.save(country);
+        
+        const countryService = new CountryService();
+        const result = await countryService.createCountry(country);
 
         res.status(201).json(result);
     } catch (error) {
@@ -20,8 +22,8 @@ export const createCountry = async (req: Request, res: Response, next: NextFunct
 // Read all countrys
 export const getCountries = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const countryRepository = AppDataSource.getRepository(Country);
-        const countries = await countryRepository.find();
+        const countryService = new CountryService();
+        const countries = await countryService.getCountries();
 
         res.status(200).json(countries);
     } catch (error) {
@@ -33,10 +35,9 @@ export const getCountries = async (req: Request, res: Response, next: NextFuncti
 export const getCountryById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const countryRepository = AppDataSource.getRepository(Country);
-        const country = await countryRepository.findOne({
-            where: { id },
-        });
+        const countryService = new CountryService();
+        const country = await countryService.getCountryById(+id);
+
         if (!country) {
             res.status(404).json({ message: 'Country not fount '});
             return;
@@ -53,16 +54,13 @@ export const updateCountry = async (req: Request, res: Response, next: NextFunct
         const { id } = req.params;
         const { name } = req.body;
 
-        const countryRepository = AppDataSource.getRepository(Country);
-        const country = await countryRepository.findOne({
-            where: { id }
-        });
+        const countryService = new CountryService;
+        const country = await countryService.updateCountry(+id, { name });
         if (!country) {
             res.status(404).json({ message: 'Country not found' });
             return;
         }
-        country.name = name;
-        await countryRepository.save(country);
+
         res.status(200).json(country);
     } catch(error) {
         next(error);
@@ -73,15 +71,13 @@ export const updateCountry = async (req: Request, res: Response, next: NextFunct
 export const deleteCountry = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const countryRepository = AppDataSource.getRepository(Country);
-        const country = await countryRepository.findOne({
-            where: { id }
-        });
+        const countryService = new CountryService();
+        const country = await countryService.deleteCountry(+id);
         if (!country)  {
             res.status(404).json({ message: 'Country not found' });
             return;
         }
-        await countryRepository.remove(country);
+
         res.status(200).json({
             message: 'ok'
         });

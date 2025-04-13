@@ -96,9 +96,10 @@ export const getContacts = async (req: Request, res: Response, next: NextFunctio
 export const getContactById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
+        const idNumber = Number(id);
         const contactRepository = AppDataSource.getRepository(Contact);
         const contact = await contactRepository.findOne({
-            where: { id },
+            where: { id : idNumber },
         });
         if (!contact) {
             res.status(404).json({ message: 'Contact not fount '});
@@ -115,6 +116,7 @@ export const getContactById = async (req: Request, res: Response, next: NextFunc
 export const updateContact = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
+        const idNumber = Number(id);
         const { 
             name,
             country,
@@ -125,7 +127,7 @@ export const updateContact = async (req: Request, res: Response, next: NextFunct
 
         const contactRepository = AppDataSource.getRepository(Contact);
         const contact = await contactRepository.findOne({
-            where: { id }
+            where: { id:idNumber }
         });
         if (!contact) {
             res.status(404).json({ message: 'Contact not found' });
@@ -140,7 +142,7 @@ export const updateContact = async (req: Request, res: Response, next: NextFunct
         await contactRepository.save(contact);
 
         const updatedContact = await contactRepository.findOne({
-            where: { id }, 
+            where: { id:idNumber }, 
             relations: {
                 country: true,
             },
@@ -157,9 +159,10 @@ export const updateContact = async (req: Request, res: Response, next: NextFunct
 export const deleteContact = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
+        const idNumber = Number(id);
         const contactRepository = AppDataSource.getRepository(Contact);
         const contact = await contactRepository.findOne({
-            where: { id }
+            where: { id:idNumber }
         });
         if (!contact)  {
             res.status(404).json({ message: 'Contact not found' });
