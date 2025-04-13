@@ -6,10 +6,8 @@
     "watch": "tsc -w",
     "build": "tsc",
     "start": "ts-node src/server.ts",
-    "start:dev": "concurrently \"tsc -w\" \"nodemon build/src/server.js\"",
-    "dev": "nodemon build/server.js",
+    "dev": "nodemon --watch src --ext ts,json --exec \"ts-node src/server.ts\"",
     "lint": "eslint 'src/**/*.ts'",
-    "dev1": "nodemon --exec ts-node ./src/server.ts",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
     "test": "jest"

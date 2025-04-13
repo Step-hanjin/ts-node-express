@@ -19,7 +19,7 @@ describe('Country Controller', () => {
         expect(response.body).toBeInstanceOf(Array);
     });
 
-    it('GET /countries should return a list of countries', async () => {
+    it('GET /country should return a country', async () => {
         const response = await request(app).get('/api/countries');
         expect(response.status).toBe(200);
         expect(response.body).toBeInstanceOf(Array);
