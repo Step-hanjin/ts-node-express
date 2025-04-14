@@ -46,13 +46,13 @@ export const getContactById = async (req: Request, res: Response, next: NextFunc
         const { id } = req.params;
         const idNumber = Number(id);
         const contactService = new ContactService();
-        const contact = await contactService.getContactById(idNumber);
+        const resData = await contactService.getContactById(idNumber);
 
-        if (!contact) {
+        if (!resData) {
             res.status(404).json({ message: 'Contact not fount '});
             return;
         }
-        res.status(200).json(contact);
+        res.status(200).json(resData);
     } catch(error) {
         next(error);
     }

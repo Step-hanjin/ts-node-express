@@ -26,7 +26,7 @@ describe('createCountry', () => {
         next = jest.fn();
     });
     
-    it('should respond with 201 and created country', async () => {
+    it('POST api/countries/', async () => {
         const mockCreatedCountry = { id: 1, name: 'china' };
 
         CountryService.prototype.createCountry = jest.fn().mockResolvedValue(mockCreatedCountry);
@@ -36,7 +36,7 @@ describe('createCountry', () => {
         expect(res.json).toHaveBeenCalledWith(mockCreatedCountry);
     });
 
-    it('should call next with error if service throws', async () => {
+    it('Error api/countries/', async () => {
         const error = new Error('Service error');
 
         CountryService.prototype.createCountry = jest.fn().mockRejectedValue(error);
@@ -47,7 +47,7 @@ describe('createCountry', () => {
 });
 
 describe('getCountries', () => {
-    it('should respond with 200 and get all countries', async () => {
+    it('GET api/countries', async () => {
         const mockGetCountries = [
             {
                 id: 1,
@@ -62,7 +62,7 @@ describe('getCountries', () => {
         expect(res.json).toHaveBeenCalledWith(mockGetCountries);
     });
 
-    it('should call next with error if service throws', async() => {
+    it('Error api/countries', async() => {
         const error = new Error('Service error');
 
         CountryService.prototype.getCountries = jest.fn().mockRejectedValue(error);
@@ -89,7 +89,7 @@ describe('getCountryById', () => {
     });
 
 
-    it('should respond with 200 and get country by id', async () => {
+    it('GET api/countries/:id', async () => {
         const mockGetCountry = { id: 1,  name: 'china'};
 
         CountryService.prototype.getCountryById = jest.fn().mockResolvedValue(mockGetCountry);
@@ -99,13 +99,21 @@ describe('getCountryById', () => {
         expect(res.json).toHaveBeenCalledWith(mockGetCountry);
     });
 
-    it('should call next with error if service throws', async () => {
+    it('Error api/countries/:id', async () => {
         const error = new Error('Service Error');
 
         CountryService.prototype.getCountryById = jest.fn().mockRejectedValue(error);
         await getCountryById(req as Request, res as Response, next);
 
         expect(next).toHaveBeenCalledWith(error);
+    });
+    
+    it('404 api/countries/:id', async () => {
+        CountryService.prototype.getCountryById = jest.fn().mockResolvedValue(null);
+        await getCountryById(req as Request, res as Response, next);
+    
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Country not found' });
     });
 });
 
@@ -127,7 +135,7 @@ describe('updateCountryById', () => {
         next = jest.fn();
     });
 
-    it('should respond with 200 and get updated country', async () => {
+    it('PUT api/countries/:id', async () => {
         const mockUpdateCountry = {
             id: '1',
             name: 'china'
@@ -140,14 +148,22 @@ describe('updateCountryById', () => {
         expect(res.json).toHaveBeenCalledWith(mockUpdateCountry);
     });
 
-    it('should call next with error if service throws', async () => {
+    it('Error api/countries/:id', async () => {
         const error = new Error('Service Error');
 
         CountryService.prototype.updateCountry = jest.fn().mockRejectedValue(error);
         await updateCountry(req as Request, res as Response, next);
 
         expect(next).toHaveBeenCalledWith(error);
-    })
+    });
+
+    it('404 api/countries/:id', async () => {
+        CountryService.prototype.updateCountry = jest.fn().mockResolvedValue(null);
+        await updateCountry(req as Request, res as Response, next);
+    
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Country not found' });
+    });
 });
 
 describe('deleteCountry', () => {
@@ -164,7 +180,7 @@ describe('deleteCountry', () => {
         next = jest.fn()
     });
 
-    it('should respond with 200 and return ok message', async () => {
+    it('DELETE api/countries/:id', async () => {
         const mockDeleteCountry = {
             message: 'ok'
         };
@@ -175,12 +191,20 @@ describe('deleteCountry', () => {
         expect(res.json).toHaveBeenCalledWith(mockDeleteCountry);
     })
 
-    it('should call next with error if service throws', async() => {
+    it('Error DELETE api/countries/:id', async() => {
         const error = new Error('Service error');
 
         CountryService.prototype.deleteCountry = jest.fn().mockRejectedValue(error);
         await deleteCountry(req as Request, res as Response, next);
 
         expect(next).toHaveBeenCalledWith(error);
-    })
+    });
+
+    it('404 api/countries/:id', async () => {
+        CountryService.prototype.deleteCountry = jest.fn().mockResolvedValue(null);
+        await deleteCountry(req as Request, res as Response, next);
+    
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Country not found' });
+    });
 });

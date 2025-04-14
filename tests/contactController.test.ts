@@ -34,7 +34,7 @@ describe('createContact', () => {
         next = jest.fn()
     });
 
-    it('should respond with 201 and get created Contact', async () => {
+    it('GET api/contacts', async () => {
         const mockCreateContact = {
             id: 1,
             name: 'John',
@@ -54,7 +54,7 @@ describe('createContact', () => {
         expect(res.json).toHaveBeenCalledWith(mockCreateContact);
     });
 
-    it('should call next with error if service throws', async () => {
+    it('Error api/contacts', async () => {
         const error = new Error('Contact create error');
 
         ContactService.prototype.createContact = jest.fn().mockRejectedValue(error);
@@ -65,7 +65,7 @@ describe('createContact', () => {
 });
 
 describe('getContacts', () => {
-    it('should respond with 200 and get all Contacts', async() => {
+    it('GET api/contacts', async() => {
         const mockGetContacts = [
             {
                 id: 1,
@@ -86,7 +86,7 @@ describe('getContacts', () => {
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockGetContacts);
     });
-    it('should call next with error if service throws', async () => {
+    it('Error api/contacts', async () => {
         const error = new Error('Contact getContact error');
 
         ContactService.prototype.getContacts = jest.fn().mockRejectedValue(error);
@@ -108,7 +108,7 @@ describe('getContactById', () => {
         next = jest.fn()
     });
 
-    it('should respond with 200 and get Contact by id', async () => {
+    it('PUT api/contacts/:id', async () => {
         const mockGetContactById = {
             id: 1,
             name: 'John',
@@ -127,14 +127,23 @@ describe('getContactById', () => {
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockGetContactById);
     });
-    it('should call next with error if service throws', async () => {
+    it('Error api/contacts/:id', async () => {
         const error = new Error('Contact getContactById error');
 
         ContactService.prototype.getContactById = jest.fn().mockRejectedValue(error);
         await getContactById(req as Request, res as Response, next);
 
         expect(next).toHaveBeenCalledWith(error);
-    })
+    });
+
+    it('404 api/contacts/:id', async () => {
+        ContactService.prototype.getContactById = jest.fn().mockResolvedValue(null);
+        await getContactById(req as Request, res as Response, next);
+    
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Contact not fount ' });
+    });
+    
 });
 
 describe('updateContact', () => {
@@ -160,7 +169,7 @@ describe('updateContact', () => {
         next = jest.fn()
     });
 
-    it('should respond with 200 and get updated Contact', async () => {
+    it('PUT api/contacts/:id', async () => {
         const mockUpdateContact = {
             id: 1,
             name: 'John',
@@ -179,13 +188,21 @@ describe('updateContact', () => {
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockUpdateContact);
     });
-    it('should call next with error if service throws', async () => {
+    it('Error api/contacts/:id', async () => {
         const error = new Error("Contact updateContact error");
 
         ContactService.prototype.updateContact = jest.fn().mockRejectedValue(error);
         await updateContact(req as Request, res as Response, next);
 
         expect(next).toHaveBeenCalledWith(error);
+    });
+
+    it('404 api/contacts/:id', async () => {
+        ContactService.prototype.updateContact = jest.fn().mockResolvedValue(null);
+        await updateContact(req as Request, res as Response, next);
+    
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Contact not found' });
     });
 });
 
@@ -201,7 +218,7 @@ describe('deleteContact', () => {
         next = jest.fn()
     });
 
-    it('should respond with 200 and get ok message', async () => {
+    it('DELETE api/contacts/:id', async () => {
         const mockDeleteContact = {
             message: 'ok'
         };
@@ -212,11 +229,18 @@ describe('deleteContact', () => {
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockDeleteContact);
     });
-    it('should call next with error if service throws', async () => {
+    it('Error api/contacts/:id', async () => {
         const error = new Error('Contact deleteContact error');
 
         ContactService.prototype.deleteContact = jest.fn().mockRejectedValue(error);
         await deleteContact(req as Request, res as Response, next);
         expect(next).toHaveBeenCalledWith(error);
+    });
+    it('404 api/contacts/:id', async () => {
+        ContactService.prototype.deleteContact = jest.fn().mockResolvedValue(null);
+        await deleteContact(req as Request, res as Response, next);
+    
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Contact not found' });
     });
 });

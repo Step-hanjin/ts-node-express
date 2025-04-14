@@ -29,7 +29,7 @@ describe('createPaymonth', () => {
         next = jest.fn()
     });
 
-    it('should respond with 201 and get created paymonth', async () => {
+    it('POST api/paymonths', async () => {
         const mockCreatePaymonth = {
             id: 1,
             month: '2025-4',
@@ -44,7 +44,7 @@ describe('createPaymonth', () => {
         expect(res.json).toHaveBeenCalledWith(mockCreatePaymonth);
     });
 
-    it('should call next with error if service throws', async () => {
+    it('Error api/paymonths', async () => {
         const error = new Error('Paymonth create error');
 
         PaymonthService.prototype.createPaymonth = jest.fn().mockRejectedValue(error);
@@ -55,7 +55,7 @@ describe('createPaymonth', () => {
 });
 
 describe('getPaymonths', () => {
-    it('should respond with 200 and get all paymonths', async() => {
+    it('GET api/paymonths', async() => {
         const mockGetPaymonths = [
             {
                 id: 1,
@@ -71,7 +71,7 @@ describe('getPaymonths', () => {
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockGetPaymonths);
     });
-    it('should call next with error if service throws', async () => {
+    it('Error api/paymonths', async () => {
         const error = new Error('Paymonth getPaymonth error');
 
         PaymonthService.prototype.getPaymonths = jest.fn().mockRejectedValue(error);
@@ -93,7 +93,7 @@ describe('getPaymonthById', () => {
         next = jest.fn()
     });
 
-    it('should respond with 200 and get paymonth by id', async () => {
+    it('GET api/countries:id', async () => {
         const mockGetPaymonthById = {
             id: 1,
             month: '2025-4',
@@ -107,14 +107,22 @@ describe('getPaymonthById', () => {
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockGetPaymonthById);
     });
-    it('should call next with error if service throws', async () => {
+    it('Error GET api/countries:id', async () => {
         const error = new Error('Paymonth getPaymonthById error');
 
         PaymonthService.prototype.getPaymonthById = jest.fn().mockRejectedValue(error);
         await getPaymonthById(req as Request, res as Response, next);
 
         expect(next).toHaveBeenCalledWith(error);
-    })
+    });
+
+    it('404 GET api/countries:id', async () => {
+        PaymonthService.prototype.getPaymonthById = jest.fn().mockResolvedValue(null);
+        await getPaymonthById(req as Request, res as Response, next);
+    
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Paymonth not found' });
+    });
 });
 
 describe('updatePaymonth', () => {
@@ -135,7 +143,7 @@ describe('updatePaymonth', () => {
         next = jest.fn()
     });
 
-    it('should respond with 200 and get updated paymonth', async () => {
+    it('PUT api/countries:id', async () => {
         const mockUpdatePaymonth = {
             id: 1,
             month: '2025-4',
@@ -149,13 +157,21 @@ describe('updatePaymonth', () => {
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockUpdatePaymonth);
     });
-    it('should call next with error if service throws', async () => {
+    it('Error api/countries:id', async () => {
         const error = new Error("Paymonth updatePaymonth error");
 
         PaymonthService.prototype.updatePaymonth = jest.fn().mockRejectedValue(error);
         await updatePaymonth(req as Request, res as Response, next);
 
         expect(next).toHaveBeenCalledWith(error);
+    });
+
+    it('404 api/countries:id', async () => {
+        PaymonthService.prototype.updatePaymonth = jest.fn().mockResolvedValue(null);
+        await updatePaymonth(req as Request, res as Response, next);
+    
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Paymonth not found' });
     });
 });
 
@@ -171,7 +187,7 @@ describe('deletePaymonth', () => {
         next = jest.fn()
     });
 
-    it('should respond with 200 and get ok message', async () => {
+    it('DELETE api/countries:id', async () => {
         const mockDeletePaymonth = {
             message: 'ok'
         };
@@ -182,11 +198,19 @@ describe('deletePaymonth', () => {
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockDeletePaymonth);
     });
-    it('should call next with error if service throws', async () => {
+    it('Error api/countries:id', async () => {
         const error = new Error('Paymonth deletePaymonth error');
 
         PaymonthService.prototype.deletePaymonth = jest.fn().mockRejectedValue(error);
         await deletePaymonth(req as Request, res as Response, next);
         expect(next).toHaveBeenCalledWith(error);
+    });
+
+    it('404 api/countries:id', async () => {
+        PaymonthService.prototype.deletePaymonth = jest.fn().mockResolvedValue(null);
+        await deletePaymonth(req as Request, res as Response, next);
+    
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Paymonth not found' });
     });
 });
