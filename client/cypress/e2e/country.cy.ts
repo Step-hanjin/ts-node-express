@@ -7,8 +7,7 @@ describe('CountryComponent E2E', () => {
     cy.contains("Add countries").should("be.visible");
     
     cy.get('table').should('exist');
-    cy.contains('USA').should('exist');
-    cy.contains('China').should('exist');
+    cy.contains('Germany').should('exist');
   });
 
   it('should open the form dialog and add a new country', () => {
@@ -32,7 +31,6 @@ describe('CountryComponent E2E', () => {
   it('should delete a country', () => {
     cy.contains('Delete').first().click();
     cy.contains('Yes').click();
-
-    cy.contains('USA').should('not exist');
+    cy.get('table').should('not.contain', 'United States');
   });
 })

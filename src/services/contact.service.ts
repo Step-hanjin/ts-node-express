@@ -51,4 +51,21 @@ export class ContactService {
         await this.contactRepository.delete(id);
         return true;
     }
+
+    async getContactsByCountryId(countryId: number): Promise<Contact[]> {
+        return await this.contactRepository.find({
+            where: { country: { id: countryId } },
+            order: {
+                id: 'ASC', // or 'DESC'
+            }
+        });
+    }
+
+    async deleteContactsByCountryId(countryId: number): Promise<boolean> {
+        const contacts = await this.getContactsByCountryId(countryId);
+        for (const contact of contacts) {
+            await this.contactRepository.delete(contact.id);
+        }
+        return true;
+    }
 }

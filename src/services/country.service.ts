@@ -1,6 +1,7 @@
 import { AppDataSource } from "../data-source";
 import { Country } from "../models/country";
 import { Repository } from "typeorm";  
+import { ContactService } from "./contact.service";
 
 export class CountryService {
     private countryRepository: Repository<Country>;
@@ -29,6 +30,8 @@ export class CountryService {
     }
 
     async deleteCountry(id: number): Promise<boolean> {
+        const contactServcie = new ContactService();
+        await contactServcie.deleteContactsByCountryId(id);
         await this.countryRepository.delete(id);
         return true;
     }
