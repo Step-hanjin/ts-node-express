@@ -18,29 +18,6 @@ const theme = createTheme({
   },
 });
 
-const getCurrentDatetime = (format: string): Dayjs => {
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-  const day = String(currentDate.getDate()).padStart(2, '0');
-  const hours = currentDate.getHours();
-  const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-  const seconds = String(currentDate.getSeconds()).padStart(2, '0');
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const formattedHours = (hours % 12 || 12).toString().padStart(2, '0');
-
-  const formattedDatetime = format
-    .replace('YYYY', String(year))
-    .replace('MM', month)
-    .replace('DD', day)
-    .replace('hh', formattedHours)
-    .replace('mm', minutes)
-    .replace('ss', seconds)
-    .replace('a', ampm);
-
-  return dayjs(formattedDatetime);
-};
-
 type Props = {
   formData: Row;
   formItems: Column[];
@@ -56,8 +33,6 @@ const FormDialog: React.FC<Props> = ({
 }) => {
   const [open, setOpen] = React.useState(false);
 
-  // React.useEffect(() => {console.log('formdialon',formData, formItems)});
-  
   const handleClickOpen = () => {
     setOpen(true);
   };
