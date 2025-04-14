@@ -6,13 +6,13 @@ import { CountryService } from '../services/country.service';
 // Create an country
 export const createCountry = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { name } = req.body;
+console.log(req.body);
+const { name } = req.body;
         const country = new Country();
         country.name = name;
         
         const countryService = new CountryService();
         const result = await countryService.createCountry(country);
-
         res.status(201).json(result);
     } catch (error) {
         next(error);

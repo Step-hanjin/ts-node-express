@@ -19,6 +19,7 @@
       "allowSyntheticDefaultImports": true
   },
  "include": [
+    "cypress",
     "src/**/*",
     "src/**/**/*"
  ],

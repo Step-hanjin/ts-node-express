@@ -47,6 +47,7 @@ const FormDialog: React.FC<Props> = ({
     const formJson = Object.fromEntries(fData.entries());
     let data: TableTypes = formJson as TableTypes; 
     data.id = formData.id;
+    console.log(data);
     saveData(data as TableTypes);
     handleClose();
   };

@@ -3,6 +3,6 @@ import axios from "axios";
 export const apiClient = axios.create({
     baseURL: 'http://localhost:3000/api',
     headers: {
-        'Content-Type' : 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/json'
     }
 })

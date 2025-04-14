@@ -75,8 +75,8 @@ const FormField: React.FC<FormFieldProps> = ({ item, defaultValue }) => {
                     required
                     margin="dense"
                     key={key}
-                    id={key}
-                    name={key}
+                    id={String(key)}
+                    name={String(key)}
                     label={name}
                     type="text"
                     defaultValue={defaultValue}
@@ -90,8 +90,8 @@ const FormField: React.FC<FormFieldProps> = ({ item, defaultValue }) => {
                     <DateField
                         label={name}
                         key={key}
-                        id={key}
-                        name={key}
+                        id={String(key)}
+                        name={String(key)}
                         defaultValue={!defaultValue?getCurrentDatetime("YYYY-MM"):dayjs(defaultValue)}
                         format="YYYY-MM"
                         variant="filled"
@@ -104,8 +104,8 @@ const FormField: React.FC<FormFieldProps> = ({ item, defaultValue }) => {
                     <DateTimeField
                         label={name}
                         key={key}
-                        id={key}
-                        name={key}
+                        id={String(key)}
+                        name={String(key)}
                         defaultValue={!defaultValue?getCurrentDatetime("YYYY/MM/DD hh:mm a"):dayjs(defaultValue)}
                         format="YYYY/MM/DD hh:mm a"
                         variant="filled"
