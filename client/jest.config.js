@@ -1,11 +1,11 @@
 module.exports = {
-    preset: 'ts-jest',
-    testEnvironment: 'jsdom',
-    transform: {
-      '^.+\\.(ts|tsx)$': 'ts-jest',
-    },
-    moduleNameMapper: {
-      "^react-router-dom$": "<rootDir>/node_modules/react-router-dom"
-    },
-    setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'], // optional
-  };
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
+  },
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'], // optional
+  transformIgnorePatterns: [
+    "/node_modules/(?!(@mui)/)",
+  ],
+};
