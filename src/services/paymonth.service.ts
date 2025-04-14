@@ -10,7 +10,11 @@ export class PaymonthService {
     }
 
     async getPaymonths() : Promise<Paymonth[]> {
-        return await this.paymonthRepository.find();
+        return await this.paymonthRepository.find({
+            order: {
+              id: 'ASC', // or 'DESC'
+            }
+        });
     }
 
     async getPaymonthById(id : number) : Promise<Paymonth | null> {

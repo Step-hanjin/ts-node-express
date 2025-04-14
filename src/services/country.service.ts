@@ -10,7 +10,9 @@ export class CountryService {
     }
 
     async getCountries(): Promise<Country[]> {
-        return await this.countryRepository.find();
+        return await this.countryRepository.find({
+            order: { id: 'ASC' }
+        });
     }
 
     async getCountryById(id: number): Promise<Country | null> {

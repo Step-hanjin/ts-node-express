@@ -10,7 +10,12 @@ export class ContactService {
     }
 
     async getContacts(): Promise<Contact[]> {
-        return await this.contactRepository.find({ relations: ["country"] });
+        return await this.contactRepository.find({ 
+            order: {
+              id: 'ASC', // or 'DESC'
+            },
+            relations: ["country"] 
+        });
     }
 
     async getContactById(id: number): Promise<Contact | null> {
