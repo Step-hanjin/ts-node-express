@@ -15,5 +15,5 @@ export class Country {
   name: string;
 
   @OneToMany(() => Contact, (contact) => contact.country)
-  contacts: Contact[]
+  contacts?: Contact[]
 }
