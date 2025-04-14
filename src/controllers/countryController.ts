@@ -39,7 +39,7 @@ export const getCountryById = async (req: Request, res: Response, next: NextFunc
         const country = await countryService.getCountryById(+id);
 
         if (!country) {
-            res.status(404).json({ message: 'Country not fount '});
+            res.status(404).json({ message: 'Country not found'});
             return;
         }
         res.status(200).json(country);

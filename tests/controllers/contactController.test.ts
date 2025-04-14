@@ -5,8 +5,8 @@ import {
     getContactById,
     updateContact,
     deleteContact
-} from '../src/controllers/contactController';
-import { ContactService } from "../src/services/contact.service";
+} from '../../src/controllers/contactController';
+import { ContactService } from "../../src/services/contact.service";
 
 let req: Partial<Request>;
 let res: Partial<Response>;
@@ -141,7 +141,7 @@ describe('getContactById', () => {
         await getContactById(req as Request, res as Response, next);
     
         expect(res.status).toHaveBeenCalledWith(404);
-        expect(res.json).toHaveBeenCalledWith({ message: 'Contact not fount ' });
+        expect(res.json).toHaveBeenCalledWith({ message: 'Contact not found' });
     });
     
 });

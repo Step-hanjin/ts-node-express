@@ -5,8 +5,8 @@ import {
     getCountryById,
     updateCountry,
     deleteCountry
-} from '../src/controllers/countryController';
-import { CountryService } from '../src/services/country.service';
+} from '../../src/controllers/countryController';
+import { CountryService } from '../../src/services/country.service';
 
 let req: Partial<Request>;
 let res: Partial<Response>;

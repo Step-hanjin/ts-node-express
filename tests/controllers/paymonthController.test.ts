@@ -5,8 +5,8 @@ import {
     getPaymonthById,
     updatePaymonth,
     deletePaymonth
-} from '../src/controllers/paymonthController';
-import { PaymonthService } from "../src/services/paymonth.service";
+} from '../../src/controllers/paymonthController';
+import { PaymonthService } from "../../src/services/paymonth.service";
 
 let req: Partial<Request>;
 let res: Partial<Response>;

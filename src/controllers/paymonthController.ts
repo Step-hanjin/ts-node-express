@@ -46,7 +46,7 @@ export const getPaymonthById = async (req: Request, res: Response, next: NextFun
         const paymonth = await paymonthService.getPaymonthById(Number(id));
 
         if (!paymonth) {
-            res.status(404).json({ message: 'Paymonth not fount '});
+            res.status(404).json({ message: 'Paymonth not found'});
             return;
         }
         res.status(200).json(paymonth);

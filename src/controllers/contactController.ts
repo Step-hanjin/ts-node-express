@@ -49,7 +49,7 @@ export const getContactById = async (req: Request, res: Response, next: NextFunc
         const resData = await contactService.getContactById(idNumber);
 
         if (!resData) {
-            res.status(404).json({ message: 'Contact not fount '});
+            res.status(404).json({ message: 'Contact not found'});
             return;
         }
         res.status(200).json(resData);
