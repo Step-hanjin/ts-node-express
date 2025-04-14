@@ -91,7 +91,10 @@ const FormDialog: React.FC<Props> = ({
                   <FormField
                     key={item.key}
                     item={item}
-                    defaultValue={formData[item.key] as string}
+                    defaultValue={
+                      typeof formData[item.key] === 'object' && formData[item.key] !== null ?
+                      (formData[item.key] as JoinObject).id :
+                      formData[item.key] as string}
                   />
                 )
               )}

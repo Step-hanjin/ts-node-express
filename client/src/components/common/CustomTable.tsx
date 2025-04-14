@@ -42,7 +42,13 @@ const CustomTable = ({
             key={row.id}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
-            {headerItems.map(col => <TableCell key={col.key}>{row[col.key]}</TableCell>)}
+
+            {headerItems.map(col => <TableCell key={col.key}>
+                {typeof row[col.key] === "object" && row[col.key] !== null
+                    ? String((row[col.key] as JoinObject).name)
+                    : String(row[col.key])}
+                </TableCell>
+            )}
             <TableCell>
                 <FormDialog
                     formData={row}

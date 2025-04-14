@@ -20,9 +20,15 @@
         type?: FormItemTypes
     }
 
+    interface JoinObject {
+        id: number,
+        name: string,
+        [key: string]: string | number
+    }
+
     interface Row {
         id: number,
-        [key: string] : string | number;
+        [key: string] : string | number | JoinObject;
     }
 // end: delcare basic types
 

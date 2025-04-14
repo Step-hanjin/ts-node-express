@@ -37,7 +37,7 @@ const ContactComponent = () => {
             key: 'name',
         },{
             name: 'Country',
-            key: 'country_name',
+            key: 'country',
         },
         {
             name: 'Email',

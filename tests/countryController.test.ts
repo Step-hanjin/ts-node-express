@@ -1,6 +1,4 @@
-import app from '../src/app';
-import { AppDataSource } from '../src/data-source';
-
+import { Request, Response, NextFunction } from 'express';
 import {
     createCountry,
     getCountries,
@@ -9,18 +7,6 @@ import {
     deleteCountry
 } from '../src/controllers/countryController';
 import { CountryService } from '../src/services/country.service';
-import { Request, Response, NextFunction } from 'express';
-import { json } from 'stream/consumers';
-
-beforeAll(async () => {
-    if (!AppDataSource.isInitialized)
-        await AppDataSource.initialize();
-});
-
-afterAll(async () => {
-    if (AppDataSource.isInitialized)
-        await AppDataSource.destroy();
-});
 
 let req: Partial<Request>;
 let res: Partial<Response>;
