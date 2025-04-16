@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import Headbar from '@/layouts/Headbar.vue';
 import Sidebar from '@/layouts/Sidebar.vue';
+import MainContent from '@/layouts/MainContent.vue';
 </script>
 <template>
-  <Sidebar />
-  <div class="ml-52 p-8">
-    <h1 class="text-2xl font-bold">Main Content</h1>
-    <p class="text-gray-600">This content appears next to the fixed sidebar.</p>
-  </div>
+  <div class="flex flex-col min-h-screen">
+    <Headbar />
+      <!-- Content -->
+      <div class="flex flex-1 overflow-hidden">
+        <Sidebar />
+      <main class="flex-1 p-6 overflow-y-auto">
+        <MainContent />
+      </main>
+      </div>
+    </div>
 </template>
 
 <style scoped>
