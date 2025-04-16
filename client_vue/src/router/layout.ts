@@ -16,6 +16,16 @@ const sidebarRoutes: RouteRecordRaw[] = [
         path: '/countries',
         name: 'Countries',
         component: Country
+    },
+    {
+        path: '/paymonths',
+        name: 'Paymonths',
+        component: Country
+    },
+    {
+        path: '/contacts',
+        name: 'Contacts',
+        component: Country
     }
 ];
 
