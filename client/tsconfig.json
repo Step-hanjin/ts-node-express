@@ -16,10 +16,12 @@
       //       //   "server/types/*"
       //     ]
       // },
-      "allowSyntheticDefaultImports": true
+      "allowSyntheticDefaultImports": true,
+      "types": ["cypress"]
   },
  "include": [
     "cypress",
+    "cypress/**/*.ts",
     "src/**/*",
     "src/**/**/*"
  ],

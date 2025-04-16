@@ -3,19 +3,19 @@ describe('CountryComponent E2E', () => {
     cy.visit("/countries");
   });
 
-  it('should load the table with countries', () => {
-    cy.contains("Add countries").should("be.visible");
-    
-    cy.get('table').should('exist');
-    cy.contains('Germany').should('exist');
-  });
-
   it('should open the form dialog and add a new country', () => {
-    cy.contains("Add countries").click();
+    cy.contains("Add country").click();
    
     cy.get('input[name="name"]').type("Germany");
     cy.contains("Save").click();
 
+    cy.contains('Germany').should('exist');
+  });
+
+  it('should load the table with countries', () => {
+    cy.contains("Add country").should("be.visible");
+    
+    cy.get('table').should('exist');
     cy.contains('Germany').should('exist');
   });
 

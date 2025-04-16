@@ -3,13 +3,6 @@ describe('PaymonthComponent E2E', () => {
     cy.visit("/paymonths");
   });
 
-  it('should load the table with paymonths', () => {
-    cy.contains("Add paymonth").should("be.visible");
-    
-    cy.get('table').should('exist');
-    cy.contains('2025-05').should('exist');
-  });
-
   it('should open the form dialog and add a new paymonth', () => {
     cy.contains("Add paymonth").click();
    
@@ -17,6 +10,13 @@ describe('PaymonthComponent E2E', () => {
     cy.contains("Save").click();
 
     cy.contains('2025-03').should('exist');
+  });
+
+  it('should load the table with paymonths', () => {
+    cy.contains("Add paymonth").should("be.visible");
+    
+    cy.get('table').should('exist');
+    cy.contains('2025-05').should('exist');
   });
 
   it('should open edit form and update a paymonth', () => {

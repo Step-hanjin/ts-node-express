@@ -11,7 +11,7 @@ import {
 } from "../../features/countrySlice";
 import CustomTable from "../common/CustomTable";
 
-const title = "countries";
+const title = "country";
 
 const headerData: Column[] = [
     {
