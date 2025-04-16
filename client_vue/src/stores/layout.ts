@@ -6,11 +6,13 @@ export interface SidebarItem {
 }
 
 interface LayoutState {
+    headTitle: string,
     activeMenuItem: string,
     sidebarItems: SidebarItem[]
 }
 export const useLayoutStore = defineStore('layout', {
     state: (): LayoutState => ({
+        headTitle: 'Select Sidebar',
         activeMenuItem: '',
         sidebarItems: [
             { label: 'Countries', route: '/countries' },
@@ -19,7 +21,8 @@ export const useLayoutStore = defineStore('layout', {
         ]
     }),
     actions: {
-        setActiveMenuIem(label: string) {
+        setActiveMenuItem(label: string) {
+            this.headTitle = label;
             this.activeMenuItem = label;
         },
         setSidebarItems(items: SidebarItem[]) {

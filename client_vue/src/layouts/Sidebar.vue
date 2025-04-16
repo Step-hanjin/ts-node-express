@@ -1,8 +1,11 @@
 <script setup lang="ts">
-const items = [
-    'Countries',
-    'Payment months'
-];
+import { useLayoutStore } from '@/stores/layout'
+const layoutStore = useLayoutStore();
+const items = layoutStore.sidebarItems;
+
+function handleMenuClick(label: string) {
+    layoutStore.setActiveMenuItem(label);
+}
 </script>
   
 <template>
@@ -12,8 +15,11 @@ const items = [
             <li 
                 v-for="item in items"
                 class="p-4 hover:bg-gray-200 cursor-pointer"
+                :key="item.route"
+                :class="{ 'bg-gray-200' : layoutStore.activeMenuItem === item.label }"
+                @click="handleMenuClick(item.label)"
             >
-                {{ item }}
+                {{ item.label }}
             </li>
         </ul>
     </nav>
