@@ -16,6 +16,7 @@ declare module 'vue' {
     Menubar: typeof import('primevue/menubar')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sidebar: typeof import('primevue/sidebar')['default']
   }
   export interface ComponentCustomProperties {
     Ripple: typeof import('primevue/ripple')['default']

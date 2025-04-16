@@ -1,11 +1,13 @@
 import { createApp } from 'vue'
 import PrimeVue from  "primevue/config"
 import Aura from '@primeuix/themes/aura'
+import { createPinia } from 'pinia'
 
 import './style.css'
 import App from './App.vue'
 
 const app = createApp(App);
+app.use(createPinia());
 app.use(PrimeVue, 
     {
         theme: {

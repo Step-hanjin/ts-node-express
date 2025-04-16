@@ -1,19 +1,12 @@
-<template>
-    <Menubar>
-      <template #start>
-        <h2>{{ title }}</h2>
-      </template>
-    </Menubar>
-  </template>
-  
 <script setup lang="ts">
 import { ref } from 'vue'
-const title = ref('Country');
+import { useLayoutStore } from '@/stores/layout'
+const layoutStore = useLayoutStore();
 </script>
-  
-  <style scoped>
-  img {
-    vertical-align: middle;
-  }
-  </style>
+
+<template>
+    <header class="bg-blue-700 text-white p-4">
+    <h1 class="text-xl font-bold">{{ layoutStore.headTitle }}</h1>
+    </header>
+</template>
   
