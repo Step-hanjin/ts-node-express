@@ -18,7 +18,7 @@ app.use(PrimeVue,
         },
         // Unstyled mode instructs the components not to add any built-in style classes so that they can be styled using custom css or libraries like Tailwind and Bootstrap. 
         // ripple: true,
-        // unstyled: true
+        unstyled: true
     }
 );
 
