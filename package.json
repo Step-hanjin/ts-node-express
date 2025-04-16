@@ -18,6 +18,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@primevue/themes": "^4.3.3",
     "@reduxjs/toolkit": "^2.6.1",
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.9",
@@ -33,6 +34,7 @@
     "memory-cache": "^0.2.0",
     "pg": "^8.14.1",
     "prettier": "^3.5.3",
+    "primevue": "^4.3.3",
     "react": "^19.1.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.0",
@@ -42,6 +44,7 @@
     "typeorm": "^0.3.22"
   },
   "devDependencies": {
+    "@primevue/auto-import-resolver": "^4.3.3",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/jest": "^29.5.14",
@@ -54,6 +57,7 @@
     "supertest": "^7.1.0",
     "ts-jest": "^29.3.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "unplugin-vue-components": "^28.5.0"
   }
 }
