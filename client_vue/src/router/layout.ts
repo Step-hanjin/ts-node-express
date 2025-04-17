@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from "vue-router";
 import Country from "@/pages/Country/Country.vue";
+import Paymonth from "@/pages/Paymonth/Paymonth.vue";
 // import { useLayoutStore } from "@/stores/layout";
 
 // const layoutStore = useLayoutStore();
@@ -20,7 +21,7 @@ const sidebarRoutes: RouteRecordRaw[] = [
     {
         path: '/paymonths',
         name: 'Paymonths',
-        component: Country
+        component: Paymonth
     },
     {
         path: '/contacts',
