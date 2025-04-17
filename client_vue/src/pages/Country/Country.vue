@@ -4,8 +4,11 @@ import type { Country,  FormField } from '@/types'
 
 import FormModal from '@/components/Form/FormModal.vue'
 import Table from '@components/Table/Table.vue'
+
+import { useLayoutStore } from '@/stores/layout'
 import { useCountryStore } from '@/stores/country';
 
+const layoutStore = useLayoutStore();
 const countryStore = useCountryStore();
 
 const showModal = ref(false);
@@ -19,6 +22,7 @@ const items: FormField[] = [
 ]
 
 onBeforeMount(() => {
+    layoutStore.setActiveMenuItem('Countries');
     countryStore.getCountries();
 });
 

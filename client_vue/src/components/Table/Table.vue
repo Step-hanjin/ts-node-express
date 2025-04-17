@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="T">
 import type { TableProps } from '@/types';
+import { getNestedValue } from '@/utils/object';
 
 const props = defineProps<TableProps<T>>()
 const emit = defineEmits<{
@@ -14,10 +15,11 @@ const onEdit = (item: T) => {
 const onDelete = (item: T) => {
     emit('delete', item);
 }
+
 </script>
 
 <template>
-    <div>
+    <div class="m-2">
         <DataTable 
             class="w-full"
             showGridlines 
@@ -28,7 +30,11 @@ const onDelete = (item: T) => {
                 :key="col.field"
                 :field="col.field"
                 :header="col.header"
-            />
+            >
+                <template #body="{ data }">
+                    {{ getNestedValue(data, col.field) }}
+                </template>
+            </Column>
 
             <!-- Action buttons slot per row -->
             <Column header="Actions">
