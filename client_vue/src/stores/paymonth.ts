@@ -7,20 +7,13 @@ import {
     deletePaymonthApi
 } from '@/services/paymonth';
 
-import type { Paymonth, TableColumn } from "@/types";
+import type { Paymonth } from "@/types";
 
 interface PaymonthState {
-    paymonths: Paymonth[],
-    columns: TableColumn[]
+    paymonths: Paymonth[]
 }
 const initalState = {
-    paymonths: [],
-    columns: [
-        {field:'id', header:'ID'},
-        {field:'month', header:'Month'},
-        {field:'start_time', header:'Start_time'},
-        {field:'end_time', header:'End_time'}
-    ]
+    paymonths: []
 };
 
 export const usePaymonthStore = defineStore('paymonth', {

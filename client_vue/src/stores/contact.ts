@@ -7,22 +7,13 @@ import {
     deleteContactApi
 } from '@/services/contact';
 
-import type { Contact, TableColumn } from "@/types";
+import type { Contact } from "@/types";
 
 interface ContactState {
-    contacts: Contact[],
-    columns: TableColumn[]
+    contacts: Contact[]
 }
 const initalState = {
-    contacts: [],
-    columns: [
-        {field:'id', header:'ID'},
-        {field:'name', header:'Name'},
-        {field:'country.name', header:'Country'},
-        {field:'email', header:'Email'},
-        {field:'phone', header:'Phone'},
-        {field:'note', header:'Note'},
-    ]
+    contacts: []
 };
 
 export const useContactStore = defineStore('contact', {
