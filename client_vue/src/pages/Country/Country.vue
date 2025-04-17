@@ -31,7 +31,7 @@ function handleDeleteCountry (country: Country) {
     countryStore.deleteCountry(country.id);
 }
 
-function handleSubmit(newCountry: Country) {
+function handleAddCountry(newCountry: Country) {
     if(selectedCountry.value?.id) {
         countryStore.updateCountry(newCountry);
     } else {
@@ -48,20 +48,18 @@ function handleAdd() {
 </script>
 
 <template>
-    <div class="space-y-1">
-        <Button label="Add Country" @click="handleAdd" />
-        <Table 
-            :items="countries" 
-            :columns="countryStore.columns"
-            @edit="handleUpdateCountry"
-            @delete="handleDeleteCountry" 
-        />
-        <FormModal
-            v-model:modalVisible="showModal" 
-            :model="selectedCountry"
-            title="Add Country"
-            :fields="items"
-            @submit="handleSubmit"
-        />
-    </div>
+    <Button label="Add Country" @click="handleAdd" />
+    <Table 
+        :items="countries" 
+        :columns="countryStore.columns"
+        @edit="handleUpdateCountry"
+        @delete="handleDeleteCountry" 
+    />
+    <FormModal
+        v-model:modalVisible="showModal" 
+        :model="selectedCountry"
+        title="Add Country"
+        :fields="items"
+        @submit="handleAddCountry"
+    />
 </template>
