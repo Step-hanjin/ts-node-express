@@ -31,7 +31,7 @@ function handleDeleteCountry (country: Country) {
     countryStore.deleteCountry(country.id);
 }
 
-function handleSubmit(newCountry: Country) {
+function handleAddCountry(newCountry: Country) {
     if(selectedCountry.value?.id) {
         countryStore.updateCountry(newCountry);
     } else {
@@ -60,6 +60,6 @@ function handleAdd() {
         :model="selectedCountry"
         title="Add Country"
         :fields="items"
-        @submit="handleSubmit"
+        @submit="handleAddCountry"
     />
 </template>
