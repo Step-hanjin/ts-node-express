@@ -45,6 +45,47 @@ function onSubmit() {
                 :type="field.type"
                 :placeholder="field.placeholder"
                 class="flex-auto" 
+                :required="field.required"
+            />
+
+            <InputMask
+                v-if="field.type === 'month'" 
+                v-model="model[field.name]" 
+                mask="2025-04"
+                :type="field.type"
+                :placeholder="field.placeholder"
+                class="flex-auto" 
+                :required="field.required"
+            />
+
+            <InputMask
+                v-if="field.type === 'datetime'" 
+                v-model="model[field.name]" 
+                mask="2025/04/01 12:25 AM"
+                :type="field.type"
+                :placeholder="field.placeholder"
+                class="flex-auto" 
+                :required="field.required"
+            />
+
+            <InputMask
+                v-if="field.type === 'phone'" 
+                v-model="model[field.name]" 
+                mask="(999) 999-9999? x99999"
+                :type="field.type"
+                :placeholder="field.placeholder"
+                class="flex-auto" 
+                :required="field.required"
+            />
+
+            <InputMask
+                v-if="field.type === 'email'" 
+                v-model="model[field.name]" 
+                mask="kevin@gmail.com"
+                :type="field.type"
+                :placeholder="field.placeholder"
+                class="flex-auto" 
+                :required="field.required"
             />
 
             <Dropdown
@@ -55,6 +96,7 @@ function onSubmit() {
                 optionValue="value"
                 :placeholder="field.placeholder"
                 calss="flex-auto"
+                :required="field.required"
             />
         </div>
 

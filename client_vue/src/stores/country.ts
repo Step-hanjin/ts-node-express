@@ -1,4 +1,11 @@
 import { defineStore } from "pinia";
+import {
+    fetchCountriesApi,
+    createCountryApi,
+    updateCountryApi,
+    deleteCountryApi
+} from '@/services/country';
+
 import type { Country, TableColumn } from "@/types";
 
 interface CountryState {
@@ -20,17 +27,21 @@ const initalState = {
 export const useCountryStore = defineStore('country', {
     state: (): CountryState => (initalState),
     actions: {
-        addCountry(country: Country) {
-            this.countries.push(country);
+        async getCountries() {
+            const response = await fetchCountriesApi();
+            this.countries= response;
         },
-        updateCountry(country: Country) {
-            const index = this.countries.findIndex(item => item.id === country.id);
-            if (index != -1) {
-                this.countries[index] = country;
-            } 
+        async addCountry(country: Country) {
+            await createCountryApi(country);
+            this.getCountries();
         },
-        deleteCountry(id: number) {
-            this.countries = this.countries.filter(country => country.id !== id);
+        async updateCountry(country: Country) {
+            await updateCountryApi(country);
+            this.getCountries();
+        },
+        async deleteCountry(id: number) {
+            await deleteCountryApi(id);
+            this.getCountries();
         }
     }
 });
