@@ -1,4 +1,4 @@
-export type FormFieldType = 'text' | 'number' | 'select' | 'month' | 'datetime'
+export type FormFieldType = 'text' | 'number' | 'select' | 'month' | 'datetime' | 'email' | 'phone'
 
 export interface FormSelectOption {
     label: string;

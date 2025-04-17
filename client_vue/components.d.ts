@@ -17,6 +17,7 @@ declare module 'vue' {
     FormDialog: typeof import('./src/components/Form/FormDialog.vue')['default']
     FormModal: typeof import('./src/components/Form/FormModal.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    InputMask: typeof import('primevue/inputmask')['default']
     InputText: typeof import('primevue/inputtext')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
