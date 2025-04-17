@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
+import { getCurrentDate  } from "@/utils/date";
 
 import type { FormModalProps } from '@/types'
 
@@ -12,15 +13,41 @@ const emit = defineEmits<{
 const visible = ref(props.modalVisible);
 const model = ref<Record<string, any>>({...props.model});
 
-watch(() => props.modalVisible, (val) => {
-    visible.value = val;
-});
+watch(
+    () => props.modalVisible, 
+    (val) => {
+        visible.value = val;
+    }
+);
 
-watch(() => props.model, (val) => {
-    model.value = {
-        ...val
-    };
-});
+watch(
+    () => props.model, 
+    (val) => {
+        props.fields.forEach(field => {
+            const defaultValue = val?.[field.name] ?? getDefaultValue(field.type);
+            model.value = model.value ?? defaultValue;
+        })
+        model.value = {
+            ...val
+        };
+    },
+    { immediate: true }
+);
+
+function getDefaultValue(type: string): string {
+    switch (type) {
+        case 'month': 
+            return getCurrentDate('YYYY-MM');
+        case 'datetime': 
+            return getCurrentDate('YYYY/MM/DD hh:mm A');
+        case 'phone': 
+            return '(000) 000-0000';
+        case 'email': 
+            return 'example@email.com';
+        default: 
+            return '';
+    }
+}
 
 function onClose() {
     emit('update:modalVisible', false);
@@ -34,13 +61,9 @@ function onSubmit() {
 
 <template>
     <Dialog v-model:visible="visible" :header="props.title" :style="{ width: '25rem' }">
-        <div 
-            v-for="field in fields"
-            :key="field.name"
-            class="flex items-center gap-4 mb-4"
-        >
+        <div v-for="field in fields" :key="field.name" class="flex items-center gap-4 mb-4">
             <InputText
-                v-if="field.type === 'text' || field.type === 'number'" 
+                v-if="['text', 'number'].includes(field.type)" 
                 v-model="model[field.name]"
                 :type="field.type"
                 :placeholder="field.placeholder"
@@ -81,7 +104,7 @@ function onSubmit() {
             <InputMask
                 v-if="field.type === 'email'" 
                 v-model="model[field.name]" 
-                mask="kevin@gmail.com"
+                mask="*@*.*"
                 :type="field.type"
                 :placeholder="field.placeholder"
                 class="flex-auto" 

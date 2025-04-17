@@ -48,18 +48,20 @@ function handleAdd() {
 </script>
 
 <template>
-    <Button label="Add Country" @click="handleAdd" />
-    <Table 
-        :items="countries" 
-        :columns="countryStore.columns"
-        @edit="handleUpdateCountry"
-        @delete="handleDeleteCountry" 
-    />
-    <FormModal
-        v-model:modalVisible="showModal" 
-        :model="selectedCountry"
-        title="Add Country"
-        :fields="items"
-        @submit="handleSubmit"
-    />
+    <div class="space-y-1">
+        <Button label="Add Country" @click="handleAdd" />
+        <Table 
+            :items="countries" 
+            :columns="countryStore.columns"
+            @edit="handleUpdateCountry"
+            @delete="handleDeleteCountry" 
+        />
+        <FormModal
+            v-model:modalVisible="showModal" 
+            :model="selectedCountry"
+            title="Add Country"
+            :fields="items"
+            @submit="handleSubmit"
+        />
+    </div>
 </template>
