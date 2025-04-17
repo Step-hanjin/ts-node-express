@@ -2,7 +2,6 @@
 import { ref, watch } from 'vue'
 import { getCurrentDate } from '@/utils/date'
 import type { FormModalProps, FormField } from '@/types'
-
 const props = defineProps<FormModalProps>()
 const emit = defineEmits<{
   (e: 'update:modalVisible', val: boolean): void
