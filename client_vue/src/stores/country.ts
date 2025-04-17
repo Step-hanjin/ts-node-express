@@ -13,11 +13,7 @@ interface CountryState {
     columns: TableColumn[]
 }
 const initalState = {
-    countries: [
-        {id:1,name:'Japan'},
-        {id:2,name:'Russia'},
-        {id:3,name:'China'},
-    ],
+    countries: [],
     columns: [
         {field:'id', header:'ID'},
         {field:'name', header:'name'}
