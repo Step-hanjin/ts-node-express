@@ -19,7 +19,9 @@ function handleMenuClick(label: string) {
                 :class="{ 'bg-gray-200' : layoutStore.activeMenuItem === item.label }"
                 @click="handleMenuClick(item.label)"
             >
-                {{ item.label }}
+                <RouterLink :to="item.route">
+                    {{ item.label }}
+                </RouterLink>
             </li>
         </ul>
     </nav>

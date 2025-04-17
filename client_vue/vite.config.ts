@@ -17,6 +17,9 @@ export default defineConfig({
     })
   ],
   server: {
+    // proxy: {
+    //   '/api': 'http://localhost:3000'
+    // },
     host: '127.0.0.1',
     port: 5173
   },
@@ -24,6 +27,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@components': path.resolve(__dirname, './src/components'),
+      '@types': path.resolve(__dirname, './src/types')
     }
   }
 })
