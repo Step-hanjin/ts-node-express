@@ -1,22 +1,22 @@
-import apiClient form './api';
+import apiClient from './api';
 import type { Country } from '@/types';
 
-export const fetchCountries = async () => {
-    const response = await apiClient.get<Country[]>('/countries');
+export const fetchCountriesApi = async () => {
+    const response = await apiClient.get('/countries');
     return response.data;
 } 
 
-export const creatCountry = async (country: Country) => {
+export const createCountryApi = async (country: Country) => {
     const response = await apiClient.post('/countries', country);
     return response.data;
 }
 
-export const updateCountry = async (country: Country) => {
-    const response = await apiClient.put(`/country/${country.id}`, country);
+export const updateCountryApi = async (country: Country) => {
+    const response = await apiClient.put(`/countries/${country.id}`, country);
     return response.data;
 }
 
-export const deleteCountry = async (id: number) => {
+export const deleteCountryApi = async (id: number) => {
     const response = await apiClient.delete(`/countries/${id}`);
     return response;
 }

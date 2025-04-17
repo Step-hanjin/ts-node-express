@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, onBeforeMount } from 'vue';
 import type { Country,  FormField } from '@/types'         
 
 import FormModal from '@/components/Form/FormModal.vue'
@@ -10,10 +10,17 @@ const countryStore = useCountryStore();
 
 const showModal = ref(false);
 const selectedCountry = ref<Partial<Country>>({});
+const countries = computed(() => {
+   return countryStore.countries;
+});
 
 const items: FormField[] = [
   { name: 'name', label: 'Country Name', type: 'text', placeholder: 'Enter country name' },
 ]
+
+onBeforeMount(() => {
+    countryStore.getCountries();
+});
 
 function handleUpdateCountry (country: Country) {
     selectedCountry.value = {...country};
@@ -43,7 +50,7 @@ function handleAdd() {
 <template>
     <Button label="Add Country" @click="handleAdd" />
     <Table 
-        :items="countryStore.countries" 
+        :items="countries" 
         :columns="countryStore.columns"
         @edit="handleUpdateCountry"
         @delete="handleDeleteCountry" 
