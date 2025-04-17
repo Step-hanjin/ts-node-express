@@ -6,18 +6,13 @@ import {
     deleteCountryApi
 } from '@/services/country';
 
-import type { Country, TableColumn } from "@/types";
+import type { Country } from "@/types";
 
 interface CountryState {
     countries: Country[],
-    columns: TableColumn[]
 }
 const initalState = {
-    countries: [],
-    columns: [
-        {field:'id', header:'ID'},
-        {field:'name', header:'name'}
-    ]
+    countries: []
 };
 
 export const useCountryStore = defineStore('country', {
