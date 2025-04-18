@@ -3,7 +3,12 @@ import { onMounted } from 'vue';
 import type { Contact } from '@/types'         
 import FormModal from '@/components/Form/FormModal.vue'
 import Table from '@components/Table/Table.vue'
+
+import { useLayout } from '@/composables/pages/useLayout'
 import { useContact } from '@/composables/pages/useContact'
+
+const { setActiveMenuItem } = useLayout();
+setActiveMenuItem("Contacts");
 
 const {
   showModal,
@@ -17,11 +22,12 @@ const {
   handleDelete,
   handleSubmit
 } = useContact();
+
 onMounted(init);
 </script>
 
 <template>
-    <Button label="Add Contact" @click="handleAdd" />
+    <Button variant="secondary" label="Add Contact" @click="handleAdd" />
     <Table 
         :items="contacts" 
         :columns="tableColumns"
