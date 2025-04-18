@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import FormModal from '@/components/Form/FormModal.vue'
 import Table from '@components/Table/Table.vue'
+
+import { useLayout } from '@/composables/pages/useLayout'
 import { usePaymonth } from '@/composables/pages/usePaymonth';
+
+const { setActiveMenuItem } = useLayout();
 
 const {
   showModal,
@@ -16,6 +21,9 @@ const {
   handleSubmit
 } = usePaymonth();
 
+onMounted(()=> {
+    init
+});
 </script>
 
 <template>

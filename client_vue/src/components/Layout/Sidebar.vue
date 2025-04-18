@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useLayoutStore } from '@/stores/layout'
-const layoutStore = useLayoutStore();
-const items = layoutStore.sidebarItems;
+import { useLayout } from '@/composables/pages/useLayout'
+const {
+    sidebarItems,
+    activeMenuItem,
+    setActiveMenuItem  
+} = useLayout();
 
-function handleMenuClick(label: string) {
-    layoutStore.setActiveMenuItem(label);
-}
 </script>
   
 <template>
@@ -13,14 +13,14 @@ function handleMenuClick(label: string) {
     <nav>
         <ul class="">
             <RouterLink 
-                v-for="item in items"
+                v-for="item in sidebarItems"
                 :to="item.route"
                 :key="item.route"
-                @click="handleMenuClick(item.label)"
+                @click="setActiveMenuItem(item.label)"
                 >
                 <li 
                     class="p-4 hover:bg-gray-200 cursor-pointer"
-                    :class="{ 'bg-gray-200' : layoutStore.activeMenuItem === item.label }"
+                    :class="{ 'bg-gray-200' : activeMenuItem == item.label }"
                 >
                         {{ item.label }}
                 </li>

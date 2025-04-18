@@ -13,14 +13,15 @@ declare module 'vue' {
     Column: typeof import('primevue/column')['default']
     DataTable: typeof import('primevue/datatable')['default']
     Dialog: typeof import('primevue/dialog')['default']
-    Dropdown: typeof import('primevue/dropdown')['default']
-    Form: typeof import('@primevue/forms/form')['default']
     FormModal: typeof import('./src/components/Form/FormModal.vue')['default']
+    Headbar: typeof import('./src/components/Layout/Headbar.vue')['default']
     InputMask: typeof import('primevue/inputmask')['default']
     InputText: typeof import('primevue/inputtext')['default']
+    MainContent: typeof import('./src/components/Layout/MainContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Select: typeof import('primevue/select')['default']
+    Sidebar: typeof import('./src/components/Layout/Sidebar.vue')['default']
     Table: typeof import('./src/components/Table/Table.vue')['default']
   }
 }
