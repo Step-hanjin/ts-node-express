@@ -59,7 +59,7 @@ function onSubmit() {
 </script>
 
 <template>
-  <Dialog v-model:visible="visible" :header="props.title" :style="{ width: '25rem' }">
+  <Dialog v-model:visible="visible" :closable="false" :closeOnEscape="true" :header="props.title" :style="{ width: '25rem' }">
       <div v-for="field in props.fields" :key="field.name" class="flex items-center gap-4 mb-4">
         <InputText
           v-if="['text', 'number'].includes(field.type)"

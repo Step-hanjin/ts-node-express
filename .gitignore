@@ -6,6 +6,8 @@ build/
 # React client node_modules directory
 client/node_modules/
 
+client_vue/components.d.ts/
+
 #Build output
 build/
 client/build/

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Headbar from '@/layouts/Headbar.vue';
-import Sidebar from '@/layouts/Sidebar.vue';
-import MainContent from '@/layouts/MainContent.vue';
+import Headbar from '@/components/Layout/Headbar.vue';
+import Sidebar from '@/components/Layout/Sidebar.vue';
+import MainContent from '@/components/Layout/MainContent.vue';
 </script>
 <template>
   <div class="flex flex-col min-h-screen">
