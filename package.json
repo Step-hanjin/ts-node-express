@@ -39,7 +39,6 @@
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
     "sass": "^1.86.3",
-    "tailwindcss": "^4.1.4",
     "typeorm": "^0.3.22"
   },
   "devDependencies": {
