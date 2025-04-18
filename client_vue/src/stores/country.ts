@@ -11,12 +11,22 @@ import type { Country } from "@/types";
 interface CountryState {
     countries: Country[],
 }
-const initalState = {
+const initialState = {
     countries: []
 };
 
+/**
+ * Country Store (Pinia)
+ * Manages state and CRUD operations for country entities using API services.
+ * 
+ * Actions:
+ * - Fetch all countries
+ * - Add a new country
+ * - Update a country
+ * - Delete a country
+ */
 export const useCountryStore = defineStore('country', {
-    state: (): CountryState => (initalState),
+    state: (): CountryState => (initialState),
     actions: {
         async getCountries() {
             const response = await fetchCountriesApi();
